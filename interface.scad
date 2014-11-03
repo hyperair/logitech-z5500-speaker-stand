@@ -8,7 +8,7 @@ use <MCAD/shapes/2Dshapes.scad>
 module interface ()
 {
     outer_cylinder_depth = 4;
-    inner_cylinder_depth = outer_cylinder_depth + 4.5;
+    inner_cylinder_depth = outer_cylinder_depth + 2.35;
 
     inner_cylinder_d = 7.35 - 0.3;
     outer_cylinder_d = 16 - 0.3;
