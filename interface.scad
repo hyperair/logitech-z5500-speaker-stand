@@ -1,7 +1,5 @@
-$fa = 1;
-$fs = 0.5;
-
 include <MCAD/units/metric.scad>
+include <options.scad>
 use <MCAD/shapes/polyhole.scad>
 use <MCAD/shapes/2Dshapes.scad>
 

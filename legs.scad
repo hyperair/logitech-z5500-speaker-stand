@@ -1,29 +1,15 @@
-screw_spacing = 75;
-leg_thickness = 22;
-leg_max_height = 21.5;
-leg_length = 50;
-clearance = 0.3;
-gradient = 5;
-$fs = 1;
-$fa = 1;
-
-overall_size = [
-    screw_spacing + leg_thickness,
-    screw_spacing + leg_length + leg_thickness / 2,
-    leg_max_height
-];
-
 include <MCAD/units/metric.scad>
+include <options.scad>
 
 use <MCAD/shapes/2Dshapes.scad>
 use <MCAD/shapes/polyhole.scad>
 
-screw = M5;
-screw_base_thickness = 5;
-
 module legs ()
 {
     difference () {
+        translate ([0, screw_spacing / 2 + leg_thickness / 2, 0])
+        rotate (gradient, X)
+        translate ([0, -(screw_spacing / 2 + leg_thickness / 2), 0])
         linear_extrude (height=leg_max_height) {
             donutSlice (innerSize=screw_spacing / 2 - leg_thickness / 2,
                 outerSize=screw_spacing / 2 + leg_thickness / 2,
@@ -49,10 +35,9 @@ module legs ()
             polyhole (d=screw * 1.8 + clearance, h=1000);
         }
 
-        translate ([0, overall_size[1] / 2, overall_size[2]])
-        rotate (gradient, X)
-        translate ([-overall_size[0] / 2 - epsilon, -overall_size[1] - epsilon * 2, 0])
-        cube (overall_size + [epsilon * 2, epsilon * 2, 100]);
+        // cut off z<0
+        translate ([0, 0, -5000])
+        cube ([10000, 10000, 10000], center=true);
     }
 }
 
