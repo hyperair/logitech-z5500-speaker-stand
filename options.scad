@@ -34,6 +34,6 @@ interface_overall_height = (interface_outer_cylinder_depth +
     interface_face_thickness);
 
 interface_ball_d = 3;
-interface_ball_orbit_r = 11;
+interface_ball_orbit_r = 10;
 
 interface_screw_size = M4;
