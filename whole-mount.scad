@@ -7,7 +7,7 @@ include <MCAD/units/metric.scad>
 module place_main_cylinder ()
 {
     translate ([0, screw_spacing / 2, -5])
-    rotate (10, X)
+    rotate (gradient, X)
     children ();
 }
 
@@ -16,14 +16,14 @@ module whole_mount ()
     mounting_cyl_d1 = 40;
     mounting_cyl_d2 = 30;
     mounting_cyl_h = 50;
-    mounting_cyl_wall_thickness = 5;
+    mounting_cyl_wall_thickness = 3;
 
     difference () {
         union () {
             legs ();
 
             place_main_cylinder ()
-            cylinder (d1=40, d2=30, h=50);
+            cylinder (d1=mounting_cyl_d1, d2=mounting_cyl_d2, h=mounting_cyl_h);
         }
 
         translate ([0, 0, -legs_overall_size[2] /2])
