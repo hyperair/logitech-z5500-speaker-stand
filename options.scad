@@ -42,4 +42,4 @@ interface_angle = 30;
 // mounting cylinder options
 mounting_cyl_d1 = 40;
 mounting_cyl_h = 50;
-mounting_cyl_wall_thickness = 3;
+mounting_cyl_wall_thickness = 2.8;
