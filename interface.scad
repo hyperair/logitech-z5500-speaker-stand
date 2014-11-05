@@ -22,8 +22,7 @@ module interface ()
                 }
             }
 
-            cylinder (d=interface_face_d - mounting_cyl_wall_thickness * 2 +
-                epsilon * 2,
+            cylinder (d=interface_face_d - mounting_cyl_wall_thickness,
                 h=interface_face_thickness);
 
             translate ([-interface_ball_orbit_r, 0, interface_face_thickness])
