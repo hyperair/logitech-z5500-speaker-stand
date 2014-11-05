@@ -27,7 +27,7 @@ interface_inner_cylinder_d = 7.35 - clearance;
 interface_outer_cylinder_d = 16 - clearance;
 interface_outer_tooth_angle = 100;
 interface_face_d = 30;
-interface_face_thickness = 4;
+interface_face_thickness = 1;
 
 interface_overall_height = (interface_outer_cylinder_depth +
     interface_inner_cylinder_depth +
