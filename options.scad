@@ -4,9 +4,9 @@ include <MCAD/units/metric.scad>
 screw_spacing = 75;
 leg_thickness = 22;
 leg_max_height = 21.5;
-leg_length = 50;
+leg_length = 38;
 clearance = 0.3;
-gradient = 5;
+gradient = 10;
 
 legs_overall_size = [
     screw_spacing + leg_thickness,
@@ -37,3 +37,9 @@ interface_ball_d = 3;
 interface_ball_orbit_r = 10;
 
 interface_screw_size = M4;
+interface_angle = 30;
+
+// mounting cylinder options
+mounting_cyl_d1 = 40;
+mounting_cyl_h = 50;
+mounting_cyl_wall_thickness = 3;

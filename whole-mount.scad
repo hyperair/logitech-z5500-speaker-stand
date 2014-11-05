@@ -7,38 +7,57 @@ include <MCAD/units/metric.scad>
 module place_main_cylinder ()
 {
     translate ([0, screw_spacing / 2, -5])
-    rotate (gradient, X)
     children ();
+}
+
+module place_interface ()
+{
+    place_main_cylinder ()
+    translate ([0, 0, mounting_cyl_h])
+    rotate (interface_angle, X)
+    rotate (90, Z)
+    children ();
+}
+
+module main_cylinder (outer=true)
+{
+    height = (outer) ? mounting_cyl_h : mounting_cyl_h + epsilon * 4;
+    d1 = ((outer) ? mounting_cyl_d1 :
+        mounting_cyl_d1 - mounting_cyl_wall_thickness * 2);
+    d2 = ((outer) ? interface_face_d :
+        interface_face_d - mounting_cyl_wall_thickness * 2);
+
+    hull () {
+        translate ([0, 0, height])
+        rotate (interface_angle, X)
+        cylinder (d=d2, h=epsilon);
+
+        cylinder (d=d1, h=epsilon);
+    }
 }
 
 module whole_mount ()
 {
-    mounting_cyl_d1 = 40;
-    mounting_cyl_d2 = 30;
-    mounting_cyl_h = 50;
-    mounting_cyl_wall_thickness = 3;
-
     difference () {
         union () {
             legs ();
 
             place_main_cylinder ()
-            cylinder (d1=mounting_cyl_d1, d2=mounting_cyl_d2, h=mounting_cyl_h);
+            main_cylinder ();
         }
 
         translate ([0, 0, -legs_overall_size[2] /2])
         cube (legs_overall_size, center=true);
 
         place_main_cylinder ()
-        translate ([0, 0, -epsilon])
-        cylinder (d1=mounting_cyl_d1 - mounting_cyl_wall_thickness * 2,
-            d2=mounting_cyl_d2 - mounting_cyl_wall_thickness * 2,
-            h=mounting_cyl_h + epsilon * 4);
+        main_cylinder (outer=false);
+
+        place_interface()
+        cylinder (d=mounting_cyl_d1, h=100);
     }
 
-    place_main_cylinder ()
-    translate ([0, 0, mounting_cyl_h - interface_face_thickness])
-    rotate (90, Z)
+    place_interface ()
+    translate ([0, 0, -interface_face_thickness])
     interface ();
 }
 
